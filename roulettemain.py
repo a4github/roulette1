@@ -1,12 +1,20 @@
 import random
+import os
+import datetime
 
 class Roulette():
 
     def __init__(self,mode):
 
+        self.output_filename = "data.txt"
+
         self.value = None
         self.color = None
         self.eo = None
+
+        self.valuehistory = []
+        self.colorhistory = []
+        self.eohistory = []
 
         # a -> アメリカンタイプ 
         # e -> ヨーロピアンタイプ
@@ -23,8 +31,12 @@ class Roulette():
 
     def Do(self):
         self.value=random.choice(self.spotlist)
-        self.eo=self.checkEo(self.value)
+        self.eo=self.CheckEo(self.value)
         self.color=self.CheckColer(self.value)
+
+        self.valuehistory.append(self.value)
+        self.colorhistory.append(self.color)
+        self.eohistory.append(self.eo)
 
     def GetResult(self):
         return self.value
@@ -76,13 +88,35 @@ class Roulette():
         elif value2 == '36': return 'red'
         else:return '-1'
 
-    def checkEo(self,value2):
+    def CheckEo(self,value2):
         if int(value2) == 0: return 'zero'
         elif (int(value2) % 2) == 0: return 'even'
         else: return 'odd'
 
+    def PrintList(self):
+        for i in range(len(self.valuehistory)):
+            print(self.valuehistory[i]+'/'+self.colorhistory[i]+'/'+self.eohistory[i])
+    
+    def OutputList(self):
+        print('ファイル書き出し中...' + str(datetime.datetime.now()))
+        file = open(self.output_filename, 'w')
+        for i in range(len(self.valuehistory)):
+            file.write(self.valuehistory[i]+'\t'+self.colorhistory[i]+'\t'+self.eohistory[i]+'\n')  
+        file.close()
+        print('ファイル書き出し完了' + str(datetime.datetime.now())) 
+
+# main
 
 rlt = Roulette('a')
-rlt.Do()
-print(rlt.GetResult()+'/'+rlt.GetColer()+'/'+rlt.GetEo())
+
+print('ルーレット実行中...' + str(datetime.datetime.now()))
+for i in range(100000):
+    rlt.Do()
+
+print('ルーレット実行完了' + str(datetime.datetime.now()))
+
+rlt.OutputList()
+#rlt.PrintList()
+
+#print(rlt.GetResult()+'/'+rlt.GetColer()+'/'+rlt.GetEo())
 
