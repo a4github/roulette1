@@ -25,11 +25,11 @@ class Roulette():
 
         #self.output_filename = "roulette1/data.txt"
 
-        self.value = None
+        self.number = None
         self.color = None
         self.eo = None
 
-        self.valuehistory = []
+        self.numberhistory = []
         self.colorhistory = []
         self.eohistory = []
 
@@ -47,16 +47,16 @@ class Roulette():
             '25','26','27','28','29','30','31','32','33','34','35','36']
 
     def Do(self):
-        self.value=random.choice(self.spotlist)
-        self.eo=self.CheckEo(self.value)
-        self.color=self.CheckColer(self.value)
+        self.number=random.choice(self.spotlist)
+        self.eo=self.CheckEo(self.number)
+        self.color=self.CheckColer(self.number)
 
-        self.valuehistory.append(self.value)
+        self.numberhistory.append(self.number)
         self.colorhistory.append(self.color)
         self.eohistory.append(self.eo)
 
     def GetResult(self):
-        return self.value
+        return self.number
 
     def GetColer(self):
         return self.color
@@ -64,55 +64,55 @@ class Roulette():
     def GetEo(self):
         return self.eo
 
-    def CheckColer(self,value2):
-        if value2 == '0': return 'zero'
-        elif value2 == '00': return 'zero'
-        elif value2 == '1': return 'red'
-        elif value2 == '2': return 'black'
-        elif value2 == '3': return 'red'
-        elif value2 == '4': return 'black'
-        elif value2 == '5': return 'red'
-        elif value2 == '6': return 'black'
-        elif value2 == '7': return 'red'
-        elif value2 == '8': return 'black'
-        elif value2 == '9': return 'red'
-        elif value2 == '10': return 'black'
-        elif value2 == '11': return 'black'
-        elif value2 == '12': return 'red'
-        elif value2 == '13': return 'black'
-        elif value2 == '14': return 'red'
-        elif value2 == '15': return 'black'
-        elif value2 == '16': return 'red'
-        elif value2 == '17': return 'black'
-        elif value2 == '18': return 'red'
-        elif value2 == '19': return 'red'
-        elif value2 == '20': return 'black'
-        elif value2 == '21': return 'red'
-        elif value2 == '22': return 'black'
-        elif value2 == '23': return 'red'
-        elif value2 == '24': return 'black'
-        elif value2 == '25': return 'red'
-        elif value2 == '26': return 'black'
-        elif value2 == '27': return 'red'
-        elif value2 == '28': return 'black'
-        elif value2 == '29': return 'black'
-        elif value2 == '30': return 'red'
-        elif value2 == '31': return 'black'
-        elif value2 == '32': return 'red'
-        elif value2 == '33': return 'black'
-        elif value2 == '34': return 'red'
-        elif value2 == '35': return 'black'
-        elif value2 == '36': return 'red'
+    def CheckColer(self,number2):
+        if number2 == '0': return 'zero'
+        elif number2 == '00': return 'zero'
+        elif number2 == '1': return 'red'
+        elif number2 == '2': return 'black'
+        elif number2 == '3': return 'red'
+        elif number2 == '4': return 'black'
+        elif number2 == '5': return 'red'
+        elif number2 == '6': return 'black'
+        elif number2 == '7': return 'red'
+        elif number2 == '8': return 'black'
+        elif number2 == '9': return 'red'
+        elif number2 == '10': return 'black'
+        elif number2 == '11': return 'black'
+        elif number2 == '12': return 'red'
+        elif number2 == '13': return 'black'
+        elif number2 == '14': return 'red'
+        elif number2 == '15': return 'black'
+        elif number2 == '16': return 'red'
+        elif number2 == '17': return 'black'
+        elif number2 == '18': return 'red'
+        elif number2 == '19': return 'red'
+        elif number2 == '20': return 'black'
+        elif number2 == '21': return 'red'
+        elif number2 == '22': return 'black'
+        elif number2 == '23': return 'red'
+        elif number2 == '24': return 'black'
+        elif number2 == '25': return 'red'
+        elif number2 == '26': return 'black'
+        elif number2 == '27': return 'red'
+        elif number2 == '28': return 'black'
+        elif number2 == '29': return 'black'
+        elif number2 == '30': return 'red'
+        elif number2 == '31': return 'black'
+        elif number2 == '32': return 'red'
+        elif number2 == '33': return 'black'
+        elif number2 == '34': return 'red'
+        elif number2 == '35': return 'black'
+        elif number2 == '36': return 'red'
         else:return 'error'
 
-    def CheckEo(self,value2):
-        if int(value2) == 0: return 'zero'
-        elif (int(value2) % 2) == 0: return 'even'
+    def CheckEo(self,number2):
+        if int(number2) == 0: return 'zero'
+        elif (int(number2) % 2) == 0: return 'even'
         else: return 'odd'
 
     def PrintList(self):
-        for i in range(len(self.valuehistory)):
-            print(self.valuehistory[i]+'/'+self.colorhistory[i]+'/'+self.eohistory[i])
+        for i in range(len(self.numberhistory)):
+            print(self.numberhistory[i]+'/'+self.colorhistory[i]+'/'+self.eohistory[i])
     
     def OutputList(self):
         print('ファイル書き出し中...' + str(datetime.datetime.now()))
@@ -124,13 +124,13 @@ class Roulette():
         black_count = 0
 
         for i in range(len(self.spotlist)):
-            number_count.append(self.valuehistory.count(self.spotlist[i]))
+            number_count.append(self.numberhistory.count(self.spotlist[i]))
 
         #file = open(self.output_filename, 'w')
         file = open(output_filename, 'w')
         
-        for i in range(len(self.valuehistory)):
-            file.write(self.valuehistory[i]+'\t'+self.colorhistory[i]+'\t'+self.eohistory[i]+'\n') 
+        for i in range(len(self.numberhistory)):
+            file.write(self.numberhistory[i]+'\t'+self.colorhistory[i]+'\t'+self.eohistory[i]+'\n') 
 
         # 改行
         file.write('\n\n')
@@ -140,7 +140,7 @@ class Roulette():
             file.write(self.spotlist[i]+'\t'+str(number_count[i])+'\n') 
 
         # 色別のカウント
-        zero_count = self.valuehistory.count('0') + self.valuehistory.count('00')
+        zero_count = self.numberhistory.count('0') + self.numberhistory.count('00')
         red_count = self.colorhistory.count('red')
         black_count = self.colorhistory.count('black')
 
@@ -155,12 +155,14 @@ class Roulette():
     def SaveSqlite(self):
         print('Sqlite INSERT start:' + str(datetime.datetime.now())) 
 
-        for i in range(len(self.valuehistory)):
-            cursor.execute("INSERT INTO deme VALUES (:id, :value, :color, :eo)",
-                   {'id': i, 'value': self.valuehistory[i], 'color':self.colorhistory[i], 'eo':self.eohistory[i]})
+        cursor.execute("delete from deme;")
 
-        #cursor.execute("INSERT INTO deme VALUES (:id, :value, :color, :eo)",
-        #           {'id': 1, 'value': '田中', 'color':'blue', 'eo':'test'})
+        for i in range(len(self.numberhistory)):
+            cursor.execute("INSERT INTO deme valueS (:id, :number, :color, :eo)",
+                   {'id': i, 'number': self.numberhistory[i], 'color':self.colorhistory[i], 'eo':self.eohistory[i]})
+
+        #cursor.execute("INSERT INTO deme valueS (:id, :number, :color, :eo)",
+        #           {'id': 1, 'number': '田中', 'color':'blue', 'eo':'test'})
 
         # 保存を実行（忘れると保存されないので注意）
         connection.commit()
